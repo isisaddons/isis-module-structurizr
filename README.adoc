@@ -1,171 +1,20 @@
-= isis-module-quartz
+= isis-module-structurizr
 
-image:https://travis-ci.org/isisaddons/isis-module-quartz.png?branch=master[Build Status,link=https://travis-ci.org/isisaddons/isis-module-quartz]
+image:https://travis-ci.org/isisaddons/isis-module-structurizr.png?branch=master[Build Status,link=https://travis-ci.org/isisaddons/isis-module-structurizr]
 
-This module, intended for use with http://isis.apache.org[Apache Isis], provides a wrapper around the Quartz scheduler.
-
-
-== How to configure/use
-
-You can either use this module "out-of-the-box", or you can fork this repo and extend to your own requirements. 
-
-=== "Out-of-the-box"
-
-To use "out-of-the-box":
-
-* update your classpath by adding this dependency in your *`webapp`*'s project's `pom.xml`: +
-+
-[source,xml]
-----
-<dependency>
-    <groupId>org.isisaddons.module.quartz</groupId>
-    <artifactId>isis-module-quartz-dom</artifactId>
-    <version>1.13.0</version>
-</dependency>
-----
+This module, intended for use with http://isis.apache.org[Apache Isis], provides an integration with the (commercial) link:http://www.structrizr.com[Structurizr] documentation tool.
 
 
-
-=== "Out-of-the-box" (-SNAPSHOT)
-
-If you want to use the current `-SNAPSHOT`, then the steps are the same as above, except:
-
-* when updating the classpath, specify the appropriate -SNAPSHOT version: +
-+
-[source,xml]
-----
-<version>1.14.0-SNAPSHOT</version>
-----
-
-* add the repository definition to pick up the most recent snapshot (we use the Cloudbees continuous integration service). We suggest defining the repository in a `<profile>`: +
-+
-[source,xml]
-----
-<profile>
-    <id>cloudbees-snapshots</id>
-    <activation>
-        <activeByDefault>true</activeByDefault>
-    </activation>
-    <repositories>
-        <repository>
-            <id>snapshots-repo</id>
-            <url>http://repository-estatio.forge.cloudbees.com/snapshot/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-</profile>
-----
-
-
-=== Forking the repo
-
-If instead you want to extend this module's functionality, then we recommend that you fork this repo. The repo is
-structured as follows:
-
-* `pom.xml` - parent pom
-* `dom` - the module implementation, depends on Isis applib
-
-
-
-
-== Usage
-
-There are many ways to configure Quartz; the instructions below are for a basic setup:
-
-* First, add an entry in `web.xml`: +
-+
-[source,xml]
-----
-<servlet>
-     <servlet-name>QuartzInitializer</servlet-name>
-     <servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>
-     <init-param>
-         <param-name>config-file</param-name>
-         <param-value>config/quartz.properties</param-value>
-     </init-param>
-     <init-param>
-         <param-name>shutdown-on-unload</param-name>
-         <param-value>true</param-value>
-     </init-param>
-     <init-param>
-         <param-name>start-scheduler-on-load</param-name>
-         <param-value>true</param-value>
-     </init-param>
-     <load-on-startup>1</load-on-startup>
-</servlet>
-----
-
-* Second, add a `config/quartz.properties` file: +
-+
-[source,ini]
-----
-org.quartz.scheduler.instanceName = SchedulerQuartzConfigXml
-org.quartz.threadPool.threadCount = 1
-org.quartz.jobStore.class = org.quartz.simpl.RAMJobStore
-org.quartz.plugin.jobInitializer.class = org.quartz.plugins.xml.XMLSchedulingDataProcessorPlugin
-org.quartz.plugin.jobInitializer.fileNames = config/quartz-config.xml
-org.quartz.plugin.jobInitializer.failOnFileNotFound = true
-----
-
-* Finally, add a `config/quartz-config.xml` file (also under in `src/main/resources` so is loaded from classpath): +
-+
-[source,xml]
-----
-<?xml version="1.0" encoding="UTF-8"?>
-<job-scheduling-data
-    xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
-    version="1.8">
-
-    <schedule>
-        <job>
-            <name>RunBackgroundJobs</name>
-            <group>DemoApp</group>
-            <description>Runs all background jobs</description>
-            <job-class>org.isisaddons.module.quartz.dom.jobs.RunBackgroundCommandsJob</job-class>
-            <job-data-map>
-                <entry>
-                    <key>user</key>
-                    <value>scheduler_user</value>
-                </entry>
-                <entry>
-                    <key>roles</key>
-                    <value>admin_role</value>
-                </entry>
-            </job-data-map>
-        </job>
-
-        <trigger>
-            <cron>
-                <name>RunBackgroundJobsEvery10Seconds</name>
-                <job-name>RunBackgroundJobs</job-name>
-                <job-group>DemoApp</job-group>
-                <cron-expression>0/10 * * * * ?</cron-expression>
-            </cron>
-        </trigger>
-
-    </schedule>
-</job-scheduling-data>
-----
-
-
-Details on the cron format can be found, for example, in link:http://quartz-scheduler.org/documentation/quartz-2.x/tutorials/tutorial-lesson-06[this tutorial].  For example:
-
-* `0 0/30 * * * ?`  is every 30 minutes
-* `0/10 * * * * ?`  is every 10 seconds
-
+[WARNING]
+====
+!!! work-in-progress !!!
+====
 
 
 
 == Change Log
 
-* `1.13.0` - released against Isis 1.13.0
+* `x.x.x` - not yet released
 
 
 
@@ -210,6 +59,32 @@ popd
 
 The artifacts should be available in Sonatype's
 https://oss.sonatype.org/content/repositories/snapshots[Snapshot Repo].
+
+
+
+=== Release an Interim Build
+
+If you have commit access to this project (or a fork of your own) then you can create interim releases using the `interim-release.sh` script.
+
+The idea is that this will - in a new branch - update the `dom/pom.xml` with a timestamped version (eg `1.13.0.20161017-0738`).
+It then pushes the branch (and a tag) to the specified remote.
+
+A CI server such as Jenkins can monitor the branches matching the wildcard `origin/interim/*` and create a build.
+These artifacts can then be published to a snapshot repository.
+
+For example:
+
+[source]
+----
+sh interim-release.sh 1.14.0 origin
+----
+
+where
+
+* `1.14.0` is the base release
+* `origin` is the name of the remote to which you have permissions to write to.
+
+
 
 === Release to Maven Central
 
