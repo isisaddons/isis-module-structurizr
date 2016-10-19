@@ -11,11 +11,42 @@ This module, intended for use with http://isis.apache.org[Apache Isis], provides
 ====
 
 
+== Screenshots
 
-== Change Log
+The example app consists of:
 
-* `x.x.x` - not yet released
+* dom module
+** menu service
+** repository service
+* fixture module
+* app module
 
+These are inferred from the `AppManifest` implementation.
+
+
+=== sign-in
+
+image::https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/010-sign-in.png[width="800px",link="https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/010-sign-in.png"]
+
+
+=== export
+
+image::https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/020-export.png[width="800px",link="https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/020-export.png"]
+
+
+=== structurizr system context
+
+image::https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/030-system-context.png[width="800px",link="https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/030-system-context.png"]
+
+
+=== structurizr container
+
+image::https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/040-container.png[width="800px",link="https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/040-container.png"]
+
+
+=== structurizr component
+
+image::https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/050-component-dom.png[width="800px",link="https://raw.githubusercontent.com/isisaddons/isis-module-structurizr/master/images/050-component-dom.png"]
 
 
 == Legal Stuff
