@@ -19,8 +19,8 @@ language governing permissions and limitations under the License.
 
     <parent>
         <groupId>org.incode</groupId>
-        <artifactId>incode-build</artifactId>
-        <version>1</version>
+        <artifactId>incode-parent</artifactId>
+        <version>1.13.2.20170214-2237</version>
         <relativePath/>
     </parent>
 
@@ -37,9 +37,7 @@ language governing permissions and limitations under the License.
     </prerequisites>
 
     <properties>
-        <isis.version>1.13.0</isis.version>
-
-        <isis-module-structurizr.version>1.13.0-SNAPSHOT</isis-module-structurizr.version>
+        <isis-module-structurizr.version>1.14.0-SNAPSHOT</isis-module-structurizr.version>
 
         <assertj-core.version>2.4.0</assertj-core.version>
 
@@ -237,26 +235,6 @@ language governing permissions and limitations under the License.
 
     <profiles>
         <profile>
-            <id>cloudbees-snapshots</id>
-            <activation>
-                <property>
-                    <name>!skip.cloudbees-snapshots</name>
-                </property>
-            </activation>
-            <repositories>
-                <repository>
-                    <id>snapshots-repo</id>
-                    <url>http://repository-estatio.forge.cloudbees.com/snapshot/</url>
-                    <releases>
-                        <enabled>false</enabled>
-                    </releases>
-                    <snapshots>
-                        <enabled>true</enabled>
-                    </snapshots>
-                </repository>
-            </repositories>
-        </profile>
-        <profile>
             <id>jcenter-release</id>
             <activation>
                 <property>
@@ -275,17 +253,6 @@ language governing permissions and limitations under the License.
                     </snapshots>
                 </repository>
             </repositories>
-        </profile>
-        <profile>
-            <id>m2e</id>
-            <activation>
-                <property>
-                    <name>m2e.version</name>
-                </property>
-            </activation>
-            <build>
-                <directory>target-ide</directory>
-            </build>
         </profile>
     </profiles>
 
